@@ -10,5 +10,13 @@ The benchmark dataset is available here:
 
 ---
 
+## Contents
+
+- `prompts.yaml`: Standardized instruction templates for all tasks (CompareTallyBench, CompareGeometryBench, CompareSpatialBench, CompareTemporalBench, and TallyBench).  
+- Benchmark datasets (links above).  
+- Code (to be released).  
+
+---
+
 📌 Paper: *CompareBench: A Benchmark for Visual Comparison Reasoning in Vision–Language Models* (WACV 2026 submission)  
 📂 Code, data, and prompts will be released in this repository.  
