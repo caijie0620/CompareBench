@@ -1,0 +1,49 @@
+CompareGeometryBench:
+  base_prompt: |
+    This is a visual comparison task from the CompareBench.
+    Please carefully compare the specified dimensional property (length, width, diameter, thickness, or height) between the four color-marked target objects in the image.
+    Follow these rules strictly:
+    - Only consider the objects that have visible colored dots on them. Ignore all other objects.
+    Answer with a single, precise letter only (e.g., A, B, C, or D). Nothing else. No text. No explanation.
+
+CompareSpatialBench:
+  base_prompt: |
+    This is a visual comparison task from the CompareBench.
+    Please carefully compare the specified spatial property (vertical height above ground or distance to the camera) between the four color-marked target objects/points in the image.
+    Follow these rules strictly:
+    - Only consider the points/objects that have visible colored dots on them. Ignore all other objects.
+    - A marked location may represent a physical object or just a point in space (e.g., in the sky, on the ground, or on the ocean).
+    - If a marked dot is on an object, compare the required spatial property for that object as a whole.
+    Answer with a single, precise letter only (e.g., A, B, C, or D). Nothing else. No text. No explanation.
+
+CompareTallyBench:
+  base_prompt: |
+    This is a counting comparison task from the CompareBench.
+    Among the four sub-images labeled (A), (B), (C), and (D) arranged in a 2x2 grid, identify which sub-image contains the highest count of the specified target category.
+    Follow these rules strictly:
+    - Please count all clearly identifiable and distinct instances of the target category in the image,
+    - including both physical objects and visual representations like drawings or prints.
+    - This includes objects that may be partially occluded, cropped, or blurred, as long as they are clearly recognizable to a human observer.
+    - Do not count reflections in mirrors, water, glass, or other reflective surfaces.
+    - Some sub-images may have been resized, causing aspect ratio distortion, so please recognize and account for this when reasoning.
+    Answer with a single, precise letter only (e.g., A, B, C, or D). Nothing else. No text. No explanation.
+
+CompareTemporalBench:
+  base_prompt: |
+    This is a multimodal reasoning task from the CompareBench, combining visual cues and background knowledge.
+    Among the four sub-images labeled (A), (B), (C), and (D) arranged in a 2x2 grid, identify which scene appears to depict an event that happened earliest in history.
+    Follow these rules strictly:
+    - Use visible visual cues (e.g., clothing style, architecture, technology, environment) to estimate the historical period of each scene.
+    - Combine these observations with relevant world knowledge about historical events or eras to determine which happened earliest.
+    - Some sub-images may have been resized, causing aspect ratio distortion, so please recognize and account for this when reasoning.
+    Answer with a single, precise letter only (e.g., A, B, C, or D). Nothing else. No text. No explanation.
+
+TallyBench:
+  base_prompt: |
+    This is an object counting task from TallyBench.
+    Follow these rules strictly:
+    - Please count all clearly identifiable and distinct instances of the target category in the image,
+    - including both physical objects and visual representations like drawings or prints.
+    - This includes objects that may be partially occluded, cropped, or blurred, as long as they are clearly recognizable to a human observer.
+    - Do not count reflections in mirrors, water, glass, or other reflective surfaces.
+    Answer with a single, precise integer only (e.g., 1, 7, 10, or 120). Nothing else. No text. No explanation.
