@@ -3,10 +3,10 @@
 CompareBench is a benchmark for evaluating **visual comparison reasoning** in vision-language models (VLMs), covering four tasks: quantity, temporal, geometric, and spatial. It is derived from two auxiliary datasets:
 
 - [TallyBench (2,000 counting images with QA)](https://huggingface.co/datasets/qiuzhangTiTi/TallyBench)  
-- [HistCaps (515 historical images with bilingual captions)](https://huggingface.co/datasets/qiuzhangTiTi/HistCaps)  
+- [OmniCaps (513 historical images + 100 celebrity images + 100 landmark images)](https://huggingface.co/datasets/qiuzhangTiTi/OmniCaps)  
 
 The benchmark dataset is available here:  
-- [CompareBench (1,000 QA pairs)](https://huggingface.co/datasets/qiuzhangTiTi/CompareBench)
+- [CompareBench (1,200 QA pairs)](https://huggingface.co/datasets/qiuzhangTiTi/CompareBench)
 
 ---
 
