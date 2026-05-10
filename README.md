@@ -1,5 +1,11 @@
 # CompareBench
 
+**Project Pages:**
+- [Project Introduction](https://caijie0620.github.io/CompareBench/intro.html) — overview, method, and results
+- [Full README](https://caijie0620.github.io/CompareBench/README.html) — dataset details and usage
+
+---
+
 CompareBench is a benchmark for evaluating **visual comparison reasoning** in vision-language models (VLMs), covering four tasks: quantity, temporal, geometric, and spatial. It is derived from two auxiliary datasets:
 
 - [TallyBench (2,000 counting images with QA)](https://huggingface.co/datasets/qiuzhangTiTi/TallyBench)  
