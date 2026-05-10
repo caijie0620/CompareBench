@@ -1,0 +1,9 @@
+# Ignore everything
+*
+
+# Except these files
+!.gitignore
+!README.md
+!prompts.yaml
+!README.html
+!intro.html
