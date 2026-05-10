@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CompareBench — Project Introduction</title>
+<style>
+:root{
+  --bg:#0d1117;--s1:#161b27;--s2:#1e2438;--border:#2a3050;
+  --accent:#7c9ef8;--purple:#a78bfa;--green:#34d399;--yellow:#fbbf24;
+  --orange:#fb923c;--red:#f87171;--text:#dde4f0;--muted:#7a869a;
+  --code-bg:#0a0d16;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;line-height:1.75}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(13,17,23,.88);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:0;padding:0 40px;height:52px;
+}
+nav .logo{font-weight:800;font-size:.95rem;color:var(--accent);margin-right:auto;letter-spacing:-.3px}
+nav a{color:var(--muted);font-size:.82rem;text-decoration:none;padding:0 14px;height:52px;display:flex;align-items:center;transition:color .2s}
+nav a:hover{color:var(--text)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;
+  padding:100px 40px 80px;
+  background:radial-gradient(ellipse 80% 60% at 50% 40%, #1a1f40 0%, var(--bg) 70%);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 25% 60%, rgba(124,158,248,.06) 0%, transparent 50%),
+             radial-gradient(circle at 75% 30%, rgba(167,139,250,.06) 0%, transparent 50%);
+}
+.pill-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;position:relative}
+.pill{background:rgba(124,158,248,.12);border:1px solid rgba(124,158,248,.25);border-radius:20px;padding:4px 14px;font-size:.75rem;font-weight:600;color:var(--accent);letter-spacing:.3px}
+.hero h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:900;line-height:1.08;letter-spacing:-1.5px;position:relative;margin-bottom:20px}
+.hero h1 span{background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .sub{font-size:1.08rem;color:var(--muted);max-width:600px;margin:0 auto 40px;position:relative}
+.cta-row{display:flex;gap:12px;justify-content:center;position:relative}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:10px;font-size:.88rem;font-weight:600;text-decoration:none;transition:all .2s}
+.btn-primary{background:var(--accent);color:#0d1117}
+.btn-primary:hover{background:#a0b8ff}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.hero-stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:64px;position:relative}
+.hero-stat .n{font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.hero-stat .l{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:4px}
+
+/* ── SECTIONS ── */
+section{padding:96px 40px;max-width:1000px;margin:0 auto}
+section+section{padding-top:0}
+.sec-tag{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent);margin-bottom:12px}
+h2{font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;letter-spacing:-.5px;margin-bottom:16px;line-height:1.2}
+.lead{font-size:1.05rem;color:var(--muted);max-width:640px;margin-bottom:40px}
+
+/* ── MOTIVATION ── */
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+@media(max-width:600px){.problem-grid{grid-template-columns:1fr}}
+.problem-card{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:24px}
+.problem-card .icon{font-size:1.6rem;margin-bottom:10px}
+.problem-card h4{font-size:.92rem;font-weight:700;margin-bottom:6px}
+.problem-card p{font-size:.84rem;color:var(--muted)}
+
+/* ── METHOD ── */
+.method-flow{display:flex;align-items:center;gap:0;overflow-x:auto;padding:4px 0 16px;margin:32px 0}
+.flow-box{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:18px 20px;min-width:160px;text-align:center;flex-shrink:0}
+.flow-box .fb-icon{font-size:1.5rem;margin-bottom:8px}
+.flow-box .fb-title{font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.flow-box .fb-sub{font-size:.74rem;color:var(--muted)}
+.flow-arrow{color:var(--border);font-size:1.4rem;padding:0 10px;flex-shrink:0}
+
+.grid-demo{
+  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
+  gap:6px;width:220px;flex-shrink:0;
+}
+.grid-cell{
+  background:var(--s2);border:1px solid var(--border);border-radius:8px;
+  height:90px;display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;font-weight:800;color:var(--accent);position:relative;
+}
+.grid-cell .lbl{
+  position:absolute;top:6px;left:8px;
+  font-size:.7rem;font-weight:700;color:var(--muted);
+}
+.grid-demo-wrap{display:flex;gap:32px;align-items:center;flex-wrap:wrap;margin:28px 0}
+.grid-q{font-size:.9rem;color:var(--text);max-width:280px}
+.grid-q strong{color:var(--accent)}
+.grid-q .choices{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.grid-q .choice{background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:.82rem}
+.grid-q .choice.correct{border-color:var(--green);color:var(--green)}
+
+/* ── BENCHMARKS ── */
+.bench-list{display:flex;flex-direction:column;gap:12px;margin:28px 0}
+.bench-item{
+  display:flex;align-items:center;gap:20px;
+  background:var(--s1);border:1px solid var(--border);border-radius:12px;
+  padding:18px 22px;transition:border-color .2s;
+}
+.bench-item:hover{border-color:var(--accent)}
+.bench-num{font-size:1.4rem;font-weight:800;color:var(--accent);min-width:56px;text-align:center}
+.bench-info{flex:1}
+.bench-info .bname{font-weight:700;font-size:.92rem;margin-bottom:3px}
+.bench-info .bdesc{font-size:.82rem;color:var(--muted)}
+.bench-tag{background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:3px 10px;font-size:.75rem;color:var(--muted);white-space:nowrap}
+
+/* ── RESULTS ── */
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:32px 0}
+@media(max-width:700px){.results-grid{grid-template-columns:1fr}}
+.results-panel{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:24px}
+.results-panel h4{font-size:.85rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:18px}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.bar-lbl{font-size:.78rem;color:var(--muted);width:150px;text-align:right;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;background:var(--s2);border-radius:5px;height:20px;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:5px;display:flex;align-items:center;padding-left:8px;font-size:.73rem;font-weight:700;color:#fff}
+.bar-fill.g{background:linear-gradient(90deg,#059669,#34d399)}
+.bar-fill.b{background:linear-gradient(90deg,#2563eb,#7c9ef8)}
+.bar-fill.p{background:linear-gradient(90deg,#7c3aed,#a78bfa)}
+.bar-fill.o{background:linear-gradient(90deg,#b45309,#fbbf24)}
+.bar-fill.r{background:linear-gradient(90deg,#be123c,#f87171)}
+
+.finding-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:32px 0}
+.finding-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:22px}
+.finding-card .fc-num{font-size:2rem;font-weight:800;line-height:1;margin-bottom:8px}
+.finding-card .fc-text{font-size:.84rem;color:var(--muted)}
+.fc-green .fc-num{color:var(--green)}
+.fc-blue .fc-num{color:var(--accent)}
+.fc-yellow .fc-num{color:var(--yellow)}
+.fc-red .fc-num{color:var(--red)}
+
+/* ── DATASET ── */
+.dataset-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
+@media(max-width:700px){.dataset-grid{grid-template-columns:1fr}}
+.ds-card{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:22px;text-align:center}
+.ds-card .ds-icon{font-size:2rem;margin-bottom:10px}
+.ds-card .ds-name{font-weight:800;font-size:1rem;margin-bottom:4px;color:var(--accent)}
+.ds-card .ds-count{font-size:1.8rem;font-weight:800;line-height:1;margin:8px 0 4px}
+.ds-card .ds-range{font-size:.78rem;color:var(--muted)}
+.ds-card .ds-desc{font-size:.82rem;color:var(--muted);margin-top:8px}
+
+.tally-types{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}
+.tt-card{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+.tt-card .tt-pct{font-size:1.5rem;font-weight:800;color:var(--accent)}
+.tt-card .tt-label{font-size:.76rem;color:var(--muted);margin-top:4px}
+
+/* ── MODELS ── */
+.model-chips{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}
+.model-chip{
+  display:flex;align-items:center;gap:8px;
+  background:var(--s1);border:1px solid var(--border);border-radius:10px;
+  padding:10px 16px;font-size:.83rem;
+}
+.model-chip .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-green{background:var(--green)}
+.dot-blue{background:var(--accent)}
+.dot-purple{background:var(--purple)}
+.dot-orange{background:var(--orange)}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:60px 40px 80px;border-top:1px solid var(--border);color:var(--muted);font-size:.82rem}
+footer a{color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="logo">CompareBench</span>
+  <a href="#motivation">Motivation</a>
+  <a href="#method">Method</a>
+  <a href="#benchmarks">Benchmarks</a>
+  <a href="#results">Results</a>
+  <a href="#dataset">Dataset</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="pill-row">
+    <span class="pill">Visual Reasoning</span>
+    <span class="pill">VLM Evaluation</span>
+    <span class="pill">Multi-Model Benchmark</span>
+  </div>
+  <h1>Can VLMs really<br><span>compare images?</span></h1>
+  <p class="sub">CompareBench systematically evaluates frontier vision-language models on six distinct visual comparison tasks — from counting objects to reasoning about historical time.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://huggingface.co/datasets/qiuzhangTiTi/CompareBench" target="_blank">&#129303; Hugging Face</a>
+    <a class="btn btn-ghost" href="#method">See How It Works ↓</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="n">1,100</div><div class="l">Comparison Pairs</div></div>
+    <div class="hero-stat"><div class="n">2,000</div><div class="l">Counting Images</div></div>
+    <div class="hero-stat"><div class="n">6</div><div class="l">Task Categories</div></div>
+    <div class="hero-stat"><div class="n">8+</div><div class="l">Models Tested</div></div>
+  </div>
+</div>
+
+<!-- ══ MOTIVATION ══ -->
+<section id="motivation">
+  <div class="sec-tag">Why This Matters</div>
+  <h2>VLMs are getting stronger —<br>but how do we really measure them?</h2>
+  <p class="lead">Existing benchmarks often test recognition or captioning. We ask a harder question: can models reason about <em>differences</em> across images?</p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="icon">📊</div>
+      <h4>Counting is underrated</h4>
+      <p>Most benchmarks skip precise object counting. TallyBench fills this gap with 2,000 images across 50+ categories, from dogs to electronics.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">🔍</div>
+      <h4>Comparison is harder than classification</h4>
+      <p>Asking "which has more?" or "which is older?" requires cross-image reasoning — a fundamentally different skill from describing a single image.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">⏳</div>
+      <h4>Temporal reasoning is rarely tested</h4>
+      <p>Can a model tell which historical photograph was taken earlier? Which landmark is older? We test this with date-grounded image pairs.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">⚖️</div>
+      <h4>Models need fair, diverse evaluation</h4>
+      <p>We test GPT, Claude, Gemini, and Grok under identical conditions across the same tasks — apples-to-apples at scale.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ METHOD ══ -->
+<section id="method">
+  <div class="sec-tag">How It Works</div>
+  <h2>The 2×2 Grid Format</h2>
+  <p class="lead">We present models with a 1600×1600 px composite of four images labeled A–D, then ask a targeted comparison question.</p>
+
+  <div class="method-flow">
+    <div class="flow-box">
+      <div class="fb-icon">🖼️</div>
+      <div class="fb-title">4 Images</div>
+      <div class="fb-sub">Selected from benchmark dataset</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <div class="fb-icon">🔲</div>
+      <div class="fb-title">2×2 Grid</div>
+      <div class="fb-sub">A / B / C / D labeled composite</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <div class="fb-icon">❓</div>
+      <div class="fb-title">Question</div>
+      <div class="fb-sub">"Which has the most X?"</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <div class="fb-icon">🤖</div>
+      <div class="fb-title">VLM Answer</div>
+      <div class="fb-sub">Single letter: A / B / C / D</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <div class="fb-icon">✅</div>
+      <div class="fb-title">Score</div>
+      <div class="fb-sub">Exact match vs. ground truth</div>
+    </div>
+  </div>
+
+  <div class="grid-demo-wrap">
+    <div class="grid-demo">
+      <div class="grid-cell"><span class="lbl">A</span>🐕🐕🐕</div>
+      <div class="grid-cell"><span class="lbl">B</span>🐕🐕🐕🐕🐕🐕🐕</div>
+      <div class="grid-cell"><span class="lbl">C</span>🐕🐕</div>
+      <div class="grid-cell"><span class="lbl">D</span>🐕🐕🐕🐕🐕</div>
+    </div>
+    <div class="grid-q">
+      <strong>Which image contains the most dogs?</strong>
+      <div class="choices">
+        <div class="choice">A — 3 dogs</div>
+        <div class="choice correct">B — 7 dogs ✓</div>
+        <div class="choice">C — 2 dogs</div>
+        <div class="choice">D — 5 dogs</div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:.85rem;color:var(--muted)">The same format is used across all six task types — only the question and image source change.</p>
+</section>
+
+<!-- ══ BENCHMARKS ══ -->
+<section id="benchmarks">
+  <div class="sec-tag">What We Test</div>
+  <h2>Six Comparison Tasks</h2>
+  <p class="lead">Each sub-benchmark isolates a specific visual reasoning ability.</p>
+
+  <div class="bench-list">
+    <div class="bench-item">
+      <div class="bench-num">600</div>
+      <div class="bench-info">
+        <div class="bname">CompareTallyBench</div>
+        <div class="bdesc">Most / least objects — 51 categories (animals, food, electronics, people…)</div>
+      </div>
+      <div class="bench-tag">Counting</div>
+    </div>
+    <div class="bench-item">
+      <div class="bench-num">200</div>
+      <div class="bench-info">
+        <div class="bname">CompareGeometryBench</div>
+        <div class="bdesc">Longest / shortest / thinnest / widest / smallest diameter</div>
+      </div>
+      <div class="bench-tag">Geometry</div>
+    </div>
+    <div class="bench-item">
+      <div class="bench-num">100</div>
+      <div class="bench-info">
+        <div class="bname">CompareSpatialBench</div>
+        <div class="bdesc">Deepest / highest — depth & vertical height comparisons</div>
+      </div>
+      <div class="bench-tag">Spatial</div>
+    </div>
+    <div class="bench-item">
+      <div class="bench-num">100</div>
+      <div class="bench-info">
+        <div class="bname">CompareHistBench</div>
+        <div class="bdesc">Earliest / latest — historical photographs dated 1707–2025</div>
+      </div>
+      <div class="bench-tag">Temporal</div>
+    </div>
+    <div class="bench-item">
+      <div class="bench-num">100</div>
+      <div class="bench-info">
+        <div class="bname">CompareCelebrityBench</div>
+        <div class="bdesc">Oldest / youngest — notable people ranked by birth year (1643–2007)</div>
+      </div>
+      <div class="bench-tag">Temporal</div>
+    </div>
+    <div class="bench-item">
+      <div class="bench-num">100</div>
+      <div class="bench-info">
+        <div class="bname">CompareLandmarkBench</div>
+        <div class="bdesc">Oldest / newest — world landmarks ranked by construction date (80–2024)</div>
+      </div>
+      <div class="bench-tag">Temporal</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESULTS ══ -->
+<section id="results">
+  <div class="sec-tag">Key Findings</div>
+  <h2>How Do Models Compare?</h2>
+  <p class="lead">Frontier models vary significantly across tasks — strong on temporal reasoning, weaker on precise counting.</p>
+
+  <div class="finding-grid">
+    <div class="finding-card fc-green">
+      <div class="fc-num">96%</div>
+      <div class="fc-text">GPT-5 on CompareLandmarkBench — best single result across all tasks</div>
+    </div>
+    <div class="finding-card fc-blue">
+      <div class="fc-num">82%</div>
+      <div class="fc-text">GPT-5 on CompareTallyBench — counting comparison is harder</div>
+    </div>
+    <div class="finding-card fc-yellow">
+      <div class="fc-num">75.6%</div>
+      <div class="fc-text">GPT-5.2 on TallyBench — best single-image counting performance</div>
+    </div>
+    <div class="finding-card fc-red">
+      <div class="fc-num">49.5%</div>
+      <div class="fc-text">Grok-4 on TallyBench — near random baseline on counting</div>
+    </div>
+  </div>
+
+  <div class="results-grid">
+    <div class="results-panel">
+      <h4>CompareBench — Tally task</h4>
+      <div class="bar-row"><div class="bar-lbl">GPT-5</div><div class="bar-track"><div class="bar-fill g" style="width:82.17%">82.2%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">claude-opus-4-6</div><div class="bar-track"><div class="bar-fill b" style="width:72.33%">72.3%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">xAI grok-4</div><div class="bar-track"><div class="bar-fill o" style="width:67.83%">67.8%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">claude-haiku-4-5</div><div class="bar-track"><div class="bar-fill b" style="width:46.17%">46.2%</div></div></div>
+    </div>
+    <div class="results-panel">
+      <h4>CompareBench — Landmark task</h4>
+      <div class="bar-row"><div class="bar-lbl">GPT-5</div><div class="bar-track"><div class="bar-fill g" style="width:96%">96.0%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">xAI grok-4</div><div class="bar-track"><div class="bar-fill o" style="width:91%">91.0%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">claude-haiku-4-5</div><div class="bar-track"><div class="bar-fill b" style="width:84%">84.0%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">claude-opus-4-6</div><div class="bar-track"><div class="bar-fill b" style="width:79%">79.0%</div></div></div>
+    </div>
+    <div class="results-panel" style="grid-column:1/-1">
+      <h4>TallyBench — Single-image counting (2,000 samples)</h4>
+      <div class="bar-row"><div class="bar-lbl">GPT-5.2</div><div class="bar-track"><div class="bar-fill g" style="width:75.6%">75.60%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">GPT-5</div><div class="bar-track"><div class="bar-fill g" style="width:73.7%">73.70%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">GPT-5.1</div><div class="bar-track"><div class="bar-fill g" style="width:73.2%">73.20%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">claude-sonnet-4-6</div><div class="bar-track"><div class="bar-fill b" style="width:68.75%">68.75%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">claude-sonnet-4-5</div><div class="bar-track"><div class="bar-fill b" style="width:67.75%">67.75%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">claude-opus-4-6</div><div class="bar-track"><div class="bar-fill b" style="width:66.05%">66.05%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">claude-opus-4-5</div><div class="bar-track"><div class="bar-fill b" style="width:61.3%">61.30%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">claude-haiku-4-5</div><div class="bar-track"><div class="bar-fill b" style="width:58.65%">58.65%</div></div></div>
+      <div class="bar-row"><div class="bar-lbl">xAI grok-4 *</div><div class="bar-track"><div class="bar-fill o" style="width:49.5%">49.50%</div></div></div>
+      <p style="font-size:.75rem;color:var(--muted);margin-top:8px">* Partial run — 1,406 / 2,000 samples.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DATASET ══ -->
+<section id="dataset">
+  <div class="sec-tag">The Dataset</div>
+  <h2>Built on OmniCaps + TallyBench</h2>
+  <p class="lead">CompareBench's temporal tasks are powered by OmniCaps — a date-keyed caption dataset covering history, landmarks, and notable people.</p>
+
+  <div class="dataset-grid">
+    <div class="ds-card">
+      <div class="ds-icon">📜</div>
+      <div class="ds-name">HistCaps</div>
+      <div class="ds-count">516</div>
+      <div class="ds-range">1707 – 2025</div>
+      <div class="ds-desc">Historical events, each image named by the event date</div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-icon">🏛️</div>
+      <div class="ds-name">LandmarkCaps</div>
+      <div class="ds-count">100</div>
+      <div class="ds-range">80 – 2024 AD</div>
+      <div class="ds-desc">World landmarks named by construction or opening date</div>
+    </div>
+    <div class="ds-card">
+      <div class="ds-icon">🌟</div>
+      <div class="ds-name">CelebrityCaps</div>
+      <div class="ds-count">100</div>
+      <div class="ds-range">1643 – 2007</div>
+      <div class="ds-desc">Notable people named by birth date</div>
+    </div>
+  </div>
+
+  <h2 style="margin-top:48px">TallyBench — 2,000 Counting Images</h2>
+  <p class="lead">A diverse mix of real photographs, AI-generated synthetic scenes, and curated objects.</p>
+  <div class="tally-types">
+    <div class="tt-card"><div class="tt-pct" style="color:var(--green)">66%</div><div class="tt-label">Real Photos<br>1,325 images</div></div>
+    <div class="tt-card"><div class="tt-pct" style="color:var(--accent)">22%</div><div class="tt-label">Synthetic (FLUX.1-dev)<br>435 images</div></div>
+    <div class="tt-card"><div class="tt-pct" style="color:var(--purple)">12%</div><div class="tt-label">Artificial / Curated<br>240 images</div></div>
+  </div>
+
+  <h3 style="font-size:1rem;font-weight:700;margin:32px 0 16px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-size:.8rem">Models Evaluated</h3>
+  <div class="model-chips">
+    <div class="model-chip"><div class="dot dot-green"></div>GPT-5 / 5.1 / 5.2</div>
+    <div class="model-chip"><div class="dot dot-blue"></div>Claude Haiku / Sonnet / Opus 4-5</div>
+    <div class="model-chip"><div class="dot dot-blue"></div>Claude Sonnet / Opus 4-6</div>
+    <div class="model-chip"><div class="dot dot-purple"></div>Gemini 2.5 Pro Preview</div>
+    <div class="model-chip"><div class="dot dot-orange"></div>xAI Grok-4</div>
+    <div class="model-chip"><div class="dot dot-green"></div>Qwen2.5-VL 3B / 7B / 32B / 72B</div>
+  </div>
+</section>
+
+<footer>
+  CompareBench &nbsp;·&nbsp; 2026 &nbsp;·&nbsp;
+  <a href="https://huggingface.co/datasets/qiuzhangTiTi/CompareBench" target="_blank">HuggingFace &#129303;</a>
+</footer>
+
+</body>
+</html>
