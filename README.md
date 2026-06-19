@@ -1,8 +1,7 @@
 # CompareBench
 
-**Project Pages:**
-- [Project Introduction](https://caijie0620.github.io/CompareBench/intro.html) — overview, method, and results
-- [Full README](https://caijie0620.github.io/CompareBench/README.html) — dataset details and usage
+**Project Page:**
+- [CompareBench Project Page](https://caijie0620.github.io/CompareBench/) — overview, method, results, and dataset links
 
 ---
 
