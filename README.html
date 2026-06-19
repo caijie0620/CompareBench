@@ -6,596 +6,413 @@
   <title>CompareBench</title>
   <style>
     :root {
-      --bg: #0f1117;
-      --surface: #1a1d27;
-      --surface2: #22263a;
-      --border: #2e3350;
-      --accent: #6c8ef7;
-      --accent2: #a78bfa;
-      --green: #34d399;
-      --yellow: #fbbf24;
-      --red: #f87171;
-      --text: #e2e8f0;
-      --muted: #8892aa;
-      --code-bg: #12151f;
+      --bg: #f7f8fb;
+      --panel: #ffffff;
+      --panel-soft: #f0f3f8;
+      --text: #182033;
+      --muted: #5f6b7d;
+      --line: #d9dfeb;
+      --accent: #2457d6;
+      --accent-soft: #e8eefc;
+      --green: #12805c;
+      --orange: #b85c00;
+      --code: #101828;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; }
 
     body {
+      margin: 0;
       background: var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       font-size: 15px;
-      line-height: 1.7;
-      padding: 0 0 80px;
+      line-height: 1.65;
     }
 
-    /* ── Header ── */
-    .hero {
-      background: linear-gradient(135deg, #1a1d27 0%, #0f1117 50%, #1a1227 100%);
-      border-bottom: 1px solid var(--border);
-      padding: 56px 40px 48px;
-      text-align: center;
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 28px 56px;
     }
-    .hero h1 {
-      font-size: 2.8rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 16px;
+
+    header {
+      padding: 20px 0 28px;
+      border-bottom: 1px solid var(--line);
     }
-    .hero p {
-      font-size: 1.05rem;
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 40px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 760px;
+      margin: 0;
       color: var(--muted);
-      max-width: 700px;
-      margin: 0 auto 28px;
+      font-size: 17px;
     }
-    .badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-    .badge {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 5px 14px;
-      font-size: 0.78rem;
-      font-weight: 600;
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
       color: var(--accent);
-      letter-spacing: 0.3px;
+      font-weight: 600;
+      text-decoration: none;
     }
 
-    /* ── Layout ── */
-    .container { max-width: 980px; margin: 0 auto; padding: 0 32px; }
+    .link:hover { border-color: var(--accent); }
 
-    section { margin-top: 56px; }
+    section { margin-top: 34px; }
 
     h2 {
-      font-size: 1.45rem;
-      font-weight: 700;
-      color: var(--text);
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 10px;
-      margin-bottom: 24px;
-    }
-    h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--accent);
-      margin: 28px 0 14px;
+      margin: 0 0 14px;
+      font-size: 22px;
+      line-height: 1.25;
     }
 
-    p { margin-bottom: 14px; color: #c8d0e0; }
+    p { margin: 0 0 14px; color: var(--muted); }
 
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* ── Stat cards ── */
-    .stat-grid {
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      margin: 24px 0;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
     }
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 18px;
-      text-align: center;
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 15px;
     }
-    .stat-card .num {
-      font-size: 2rem;
+
+    .metric {
+      font-size: 28px;
+      line-height: 1;
       font-weight: 800;
       color: var(--accent);
-      line-height: 1.1;
-    }
-    .stat-card .label {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
-    /* ── Tables ── */
-    .table-wrap { overflow-x: auto; margin: 16px 0 24px; border-radius: 10px; border: 1px solid var(--border); }
-    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-    thead tr { background: var(--surface2); }
-    thead th {
-      padding: 11px 16px;
-      text-align: left;
-      font-weight: 600;
+    .label {
+      margin-top: 8px;
       color: var(--muted);
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 0.5px;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--panel-soft);
+      color: #344054;
+      font-weight: 700;
       white-space: nowrap;
     }
-    tbody tr { border-top: 1px solid var(--border); transition: background 0.15s; }
-    tbody tr:hover { background: var(--surface2); }
-    tbody td { padding: 10px 16px; color: var(--text); }
-    td.center, th.center { text-align: center; }
-    .bold { font-weight: 700; color: var(--green); }
-    .muted-cell { color: var(--muted); }
-    .tag {
-      display: inline-block;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1px 8px;
-      font-size: 0.78rem;
-      color: var(--accent2);
-      font-family: monospace;
+
+    tr:last-child td { border-bottom: 0; }
+
+    .num { text-align: right; white-space: nowrap; }
+    .good { color: var(--green); font-weight: 700; }
+    .warn { color: var(--orange); font-weight: 700; }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.92em;
     }
 
-    /* ── Bar chart ── */
-    .bar-row { margin: 6px 0; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; }
-    .bar-label { width: 170px; text-align: right; color: var(--muted); flex-shrink: 0; font-size: 0.82rem; }
-    .bar-track { flex: 1; background: var(--surface2); border-radius: 6px; height: 22px; overflow: hidden; }
-    .bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 8px; font-size: 0.78rem; font-weight: 700; color: #fff; white-space: nowrap; }
-    .bar-fill.blue  { background: linear-gradient(90deg, #3b82f6, #6c8ef7); }
-    .bar-fill.green { background: linear-gradient(90deg, #059669, #34d399); }
-    .bar-fill.purple{ background: linear-gradient(90deg, #7c3aed, #a78bfa); }
-    .bar-fill.orange{ background: linear-gradient(90deg, #d97706, #fbbf24); }
-
-    /* ── Code blocks ── */
     pre {
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 18px 20px;
+      margin: 0;
+      padding: 15px;
       overflow-x: auto;
-      font-size: 0.83rem;
-      line-height: 1.6;
-      margin: 12px 0 20px;
-    }
-    code { font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace; }
-    p code, li code, td code {
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 1px 6px;
-      font-size: 0.83em;
-      color: var(--accent2);
-      font-family: monospace;
-    }
-    .comment { color: #4b5a7a; }
-    .kw { color: #6c8ef7; }
-    .str { color: #34d399; }
-
-    /* ── Directory tree ── */
-    .tree {
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 18px 20px;
-      font-family: monospace;
-      font-size: 0.84rem;
-      line-height: 1.8;
-    }
-    .tree .dir { color: var(--accent); font-weight: 600; }
-    .tree .desc { color: var(--muted); }
-
-    /* ── Benchmark cards ── */
-    .bench-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      margin: 20px 0;
-    }
-    .bench-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-    }
-    .bench-card .bname {
-      font-weight: 700;
-      color: var(--accent);
-      font-size: 0.9rem;
-      margin-bottom: 6px;
-    }
-    .bench-card .bcount {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--text);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .bench-card .bunit { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; }
-    .bench-card .btask { font-size: 0.82rem; color: #8892aa; margin-top: 10px; }
-
-    /* ── HF chips ── */
-    .hf-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
-    .hf-chip {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 16px;
-      font-size: 0.84rem;
-      color: var(--text);
-      text-decoration: none;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .hf-chip:hover { border-color: var(--accent); background: var(--surface2); text-decoration: none; }
-    .hf-chip .hf-icon { color: var(--yellow); font-size: 1.1rem; }
-
-    /* ── Stack pills ── */
-    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-    .pill {
-      background: var(--surface2);
-      border: 1px solid var(--border);
+      color: #eef4ff;
+      background: var(--code);
       border-radius: 8px;
-      padding: 5px 12px;
-      font-size: 0.8rem;
-      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
     }
 
-    /* ── Divider ── */
-    hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+    .tree {
+      padding: 16px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: #344054;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      overflow-x: auto;
+    }
 
-    /* ── Footer ── */
+    .note {
+      padding: 14px 16px;
+      background: var(--accent-soft);
+      border: 1px solid #c8d6fb;
+      border-radius: 8px;
+      color: #243b67;
+    }
+
     footer {
-      text-align: center;
-      margin-top: 64px;
+      margin-top: 44px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
       color: var(--muted);
-      font-size: 0.8rem;
-      border-top: 1px solid var(--border);
-      padding-top: 24px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      .wrap { padding: 28px 18px 42px; }
+      h1 { font-size: 32px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      table { font-size: 13px; }
+      th, td { padding: 9px; }
     }
   </style>
 </head>
 <body>
+  <div class="wrap">
+    <header>
+      <h1>CompareBench</h1>
+      <p class="subtitle">
+        A benchmark suite for evaluating visual comparison reasoning in vision-language models,
+        covering quantity, geometry, spatial relations, and temporal order.
+      </p>
+      <div class="links">
+        <a class="link" href="https://caijie0620.github.io/CompareBench/intro.html">Project Introduction</a>
+        <a class="link" href="https://huggingface.co/datasets/qiuzhangTiTi/CompareBench">CompareBench on HF</a>
+        <a class="link" href="https://huggingface.co/datasets/qiuzhangTiTi/TallyBench">TallyBench on HF</a>
+        <a class="link" href="https://huggingface.co/datasets/qiuzhangTiTi/OmniCaps">OmniCaps on HF</a>
+      </div>
+    </header>
 
-<!-- ══════════════════ HERO ══════════════════ -->
-<div class="hero">
-  <h1>CompareBench</h1>
-  <p>A comprehensive multi-model visual reasoning benchmark suite — evaluating VLMs on side-by-side image comparison, object counting, and temporal reasoning.</p>
-  <div class="badges">
-    <span class="badge">CompareBench &nbsp;1,100 samples</span>
-    <span class="badge">TallyBench &nbsp;2,000 images</span>
-    <span class="badge">OmniCaps &nbsp;716 images</span>
-    <span class="badge">8+ VLMs evaluated</span>
-    <span class="badge">Hugging Face</span>
-  </div>
-</div>
+    <section>
+      <div class="grid">
+        <div class="card">
+          <div class="metric">1,200</div>
+          <div class="label">CompareBench QA pairs</div>
+        </div>
+        <div class="card">
+          <div class="metric">4</div>
+          <div class="label">Comparison sub-benchmarks</div>
+        </div>
+        <div class="card">
+          <div class="metric">2,000</div>
+          <div class="label">TallyBench counting images</div>
+        </div>
+        <div class="card">
+          <div class="metric">716</div>
+          <div class="label">OmniCaps captioned images</div>
+        </div>
+      </div>
+    </section>
 
-<div class="container">
+    <section>
+      <h2>Overview</h2>
+      <p>
+        CompareBench asks models to choose one answer from A-D by comparing objects, scenes,
+        marked points, or temporal evidence. It is built with two supporting resources:
+        TallyBench for object counting and OmniCaps for date-keyed image captions.
+      </p>
+      <div class="note">
+        Current official CompareBench splits are
+        <code>CompareTallyBench</code>, <code>CompareGeometryBench</code>,
+        <code>CompareSpatialBench</code>, and <code>CompareTemporalBench</code>.
+      </div>
+    </section>
 
-<!-- ══════════════════ STATS ══════════════════ -->
-<section>
-  <div class="stat-grid">
-    <div class="stat-card">
-      <div class="num">1,100</div>
-      <div class="label">CompareBench Samples</div>
-    </div>
-    <div class="stat-card">
-      <div class="num">2,000</div>
-      <div class="label">TallyBench Images</div>
-    </div>
-    <div class="stat-card">
-      <div class="num">716</div>
-      <div class="label">OmniCaps Images</div>
-    </div>
-    <div class="stat-card">
-      <div class="num">6</div>
-      <div class="label">Sub-Benchmarks</div>
-    </div>
-    <div class="stat-card">
-      <div class="num">51</div>
-      <div class="label">Object Categories</div>
-    </div>
-    <div class="stat-card">
-      <div class="num">8+</div>
-      <div class="label">Models Evaluated</div>
-    </div>
-  </div>
-</section>
+    <section>
+      <h2>CompareBench Splits</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Split</th>
+            <th>Samples</th>
+            <th>Format</th>
+            <th>Task</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>CompareTallyBench</code></td>
+            <td class="num">600</td>
+            <td>2x2 grid</td>
+            <td>Choose the image with the most or fewest target objects.</td>
+          </tr>
+          <tr>
+            <td><code>CompareGeometryBench</code></td>
+            <td class="num">200</td>
+            <td>Single image with A-D labels</td>
+            <td>Compare length, width, height, thickness, or diameter.</td>
+          </tr>
+          <tr>
+            <td><code>CompareSpatialBench</code></td>
+            <td class="num">100</td>
+            <td>Single image with A-D labels</td>
+            <td>Compare depth or vertical height above ground.</td>
+          </tr>
+          <tr>
+            <td><code>CompareTemporalBench</code></td>
+            <td class="num">300</td>
+            <td>2x2 grid</td>
+            <td>Choose the earlier or later image across history, landmarks, and public figures.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-<!-- ══════════════════ STRUCTURE ══════════════════ -->
-<section>
-  <h2>Project Structure</h2>
-  <div class="tree">
-<span class="dir">CompareBench/</span><br>
-├── <span class="dir">CompareBench/</span>     <span class="desc"># Main 2×2 comparison benchmark (1,100 samples, 6 sub-tasks)</span><br>
-├── <span class="dir">TallyBench/</span>       <span class="desc"># Single-image object counting (2,000 images)</span><br>
-├── <span class="dir">OmniCaps/</span>         <span class="desc"># Multi-domain caption datasets (716 images)</span><br>
-│   ├── <span class="dir">HistCaps/</span>     <span class="desc">#   Historical events (516 images, 1707–2025)</span><br>
-│   ├── <span class="dir">LandmarkCaps/</span> <span class="desc">#   World landmarks (100 images, 80–2024)</span><br>
-│   └── <span class="dir">CelebrityCaps/</span><span class="desc">#   Notable people (100 images, 1643–2007)</span><br>
-├── <span class="dir">Agent_Solution/</span>   <span class="desc"># Agentic task packaging for automated evaluation</span><br>
-├── <span class="dir">Drawing_python/</span>   <span class="desc"># Dataset visualization scripts</span><br>
-└── <span class="dir">Drawing_pptx/</span>    <span class="desc"># Presentation assets and paper figures</span>
-  </div>
-</section>
+    <section>
+      <h2>Supporting Resources</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Resource</th>
+            <th>Size</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>TallyBench</code></td>
+            <td>2,000 images</td>
+            <td>Standalone object counting benchmark and source for quantity comparison.</td>
+          </tr>
+          <tr>
+            <td><code>OmniCaps</code></td>
+            <td>716 images</td>
+            <td>Date-keyed captions and tags for temporal comparison.</td>
+          </tr>
+          <tr>
+            <td><code>HistoryCaps</code></td>
+            <td>516 images</td>
+            <td>Historical events and scenes from 1707-2025.</td>
+          </tr>
+          <tr>
+            <td><code>LandmarkCaps</code></td>
+            <td>100 images</td>
+            <td>World landmarks ordered by construction or opening dates.</td>
+          </tr>
+          <tr>
+            <td><code>CelebrityCaps</code></td>
+            <td>100 images</td>
+            <td>Public figures ordered by birth dates.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-<!-- ══════════════════ BENCHMARKS ══════════════════ -->
-<section>
-  <h2>Benchmarks at a Glance</h2>
+    <section>
+      <h2>Representative Results</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th class="num">Tally</th>
+            <th class="num">Geometry</th>
+            <th class="num">Spatial</th>
+            <th class="num">Temporal</th>
+            <th class="num">Average</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gemini 3.5 Flash</td>
+            <td class="num good">97.00</td>
+            <td class="num good">87.50</td>
+            <td class="num good">93.00</td>
+            <td class="num good">89.33</td>
+            <td class="num good">93.17</td>
+          </tr>
+          <tr>
+            <td>Gemini 3.1 Pro</td>
+            <td class="num">96.17</td>
+            <td class="num">84.00</td>
+            <td class="num">88.00</td>
+            <td class="num">88.67</td>
+            <td class="num">91.58</td>
+          </tr>
+          <tr>
+            <td>OpenAI GPT-5.4</td>
+            <td class="num">88.67</td>
+            <td class="num">86.50</td>
+            <td class="num">85.00</td>
+            <td class="num">84.67</td>
+            <td class="num">87.00</td>
+          </tr>
+          <tr>
+            <td>Human</td>
+            <td class="num">99.00</td>
+            <td class="num">98.00</td>
+            <td class="num">98.00</td>
+            <td class="num warn">31.67</td>
+            <td class="num">81.92</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Accuracy is reported in percent. Temporal comparison often requires external world knowledge.</p>
+    </section>
 
-  <h3>CompareBench — Visual Comparison Reasoning</h3>
-  <p>Models are shown a <strong>1600×1600 px 2×2 grid</strong> of images and asked <em>"which image is most / least X?"</em> with an A/B/C/D answer.</p>
+    <section>
+      <h2>Dataset Structure</h2>
+      <div class="tree">
+CompareBench/<br>
+├── CompareTallyBench_600/<br>
+├── CompareGeometryBench_200/<br>
+├── CompareSpatialBench_100/<br>
+├── CompareTemporalBench_300/<br>
+│   ├── 0001-0100  historical scenes/events<br>
+│   ├── 0101-0200  landmarks/buildings<br>
+│   └── 0201-0300  public figures<br>
+├── json/<br>
+│   ├── CompareTallyBench.json<br>
+│   ├── CompareGeometryBench.json<br>
+│   ├── CompareSpatialBench.json<br>
+│   └── CompareTemporalBench.json<br>
+└── config/prompts.yaml
+      </div>
+    </section>
 
-  <div class="bench-grid">
-    <div class="bench-card">
-      <div class="bname">CompareTallyBench</div>
-      <div class="bcount">600</div>
-      <div class="bunit">samples</div>
-      <div class="btask">Most / least objects across 51 categories</div>
-    </div>
-    <div class="bench-card">
-      <div class="bname">CompareGeometryBench</div>
-      <div class="bcount">200</div>
-      <div class="bunit">samples</div>
-      <div class="btask">Longest / shortest / thinnest / widest / smallest diameter</div>
-    </div>
-    <div class="bench-card">
-      <div class="bname">CompareSpatialBench</div>
-      <div class="bcount">100</div>
-      <div class="bunit">samples</div>
-      <div class="btask">Deepest / highest (depth & vertical height)</div>
-    </div>
-    <div class="bench-card">
-      <div class="bname">CompareHistBench</div>
-      <div class="bcount">100</div>
-      <div class="bunit">samples</div>
-      <div class="btask">Earliest / latest historical photograph</div>
-    </div>
-    <div class="bench-card">
-      <div class="bname">CompareCelebrityBench</div>
-      <div class="bcount">100</div>
-      <div class="bunit">samples</div>
-      <div class="btask">Oldest / youngest celebrity by birth year</div>
-    </div>
-    <div class="bench-card">
-      <div class="bname">CompareLandmarkBench</div>
-      <div class="bcount">100</div>
-      <div class="bunit">samples</div>
-      <div class="btask">Oldest / newest landmark by construction date</div>
-    </div>
-  </div>
+    <section>
+      <h2>Quick Start</h2>
+      <pre><code>source ~/miniforge3/etc/profile.d/conda.sh
+conda activate ACCV2026
 
-  <h3>TallyBench — Object Counting</h3>
-  <p>2,000 single images across 50+ fine-grained categories. Models output an integer count.</p>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Image Type</th><th>Count</th><th>Share</th></tr></thead>
-      <tbody>
-        <tr><td>Real photographs</td><td>1,325</td><td>66%</td></tr>
-        <tr><td>Synthetic (FLUX.1-dev)</td><td>435</td><td>22%</td></tr>
-        <tr><td>Artificial / curated</td><td>240</td><td>12%</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>OmniCaps — Caption Dataset</h3>
-  <p>Date-keyed image captions powering the three temporal sub-benchmarks. Hosted on Hugging Face at <a href="https://huggingface.co/datasets/qiuzhangTiTi/OmniCaps" target="_blank">qiuzhangTiTi/OmniCaps</a>.</p>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Split</th><th>Images</th><th>Date Range</th><th>Subject</th></tr></thead>
-      <tbody>
-        <tr><td>HistCaps</td><td>516</td><td>1707–2025</td><td>Historical events</td></tr>
-        <tr><td>LandmarkCaps</td><td>100</td><td>80–2024</td><td>World landmarks</td></tr>
-        <tr><td>CelebrityCaps</td><td>100</td><td>1643–2007</td><td>Notable people (birth dates)</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- ══════════════════ RESULTS ══════════════════ -->
-<section>
-  <h2>Benchmark Results</h2>
-
-  <h3>CompareBench (A/B/C/D accuracy)</h3>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Model</th>
-          <th class="center">CompareTally</th>
-          <th class="center">CompareGeo</th>
-          <th class="center">CompareSpatial</th>
-          <th class="center">CompareHist</th>
-          <th class="center">CompareCelebrity</th>
-          <th class="center">CompareLandmark</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>GPT-5</strong></td>
-          <td class="center bold">82.17%</td>
-          <td class="center bold">70.50%</td>
-          <td class="center muted-cell">—</td>
-          <td class="center muted-cell">—</td>
-          <td class="center muted-cell">—</td>
-          <td class="center bold">96.00%</td>
-        </tr>
-        <tr>
-          <td>claude-opus-4-6</td>
-          <td class="center">72.33%</td>
-          <td class="center muted-cell">—</td>
-          <td class="center muted-cell">—</td>
-          <td class="center muted-cell">—</td>
-          <td class="center muted-cell">—</td>
-          <td class="center">79.00%</td>
-        </tr>
-        <tr>
-          <td>xAI grok-4</td>
-          <td class="center">67.83%</td>
-          <td class="center muted-cell">—</td>
-          <td class="center muted-cell">—</td>
-          <td class="center muted-cell">—</td>
-          <td class="center">91.00%</td>
-          <td class="center muted-cell">—</td>
-        </tr>
-        <tr>
-          <td>claude-haiku-4-5</td>
-          <td class="center">46.17%</td>
-          <td class="center muted-cell">—</td>
-          <td class="center muted-cell">—</td>
-          <td class="center muted-cell">—</td>
-          <td class="center">84.00%</td>
-          <td class="center muted-cell">—</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>TallyBench (counting accuracy)</h3>
-
-  <div class="bar-row"><div class="bar-label">GPT-5.2</div><div class="bar-track"><div class="bar-fill green" style="width:75.6%">75.60%</div></div></div>
-  <div class="bar-row"><div class="bar-label">GPT-5</div><div class="bar-track"><div class="bar-fill green" style="width:73.7%">73.70%</div></div></div>
-  <div class="bar-row"><div class="bar-label">GPT-5.1</div><div class="bar-track"><div class="bar-fill green" style="width:73.2%">73.20%</div></div></div>
-  <div class="bar-row"><div class="bar-label">claude-sonnet-4-6</div><div class="bar-track"><div class="bar-fill blue" style="width:68.75%">68.75%</div></div></div>
-  <div class="bar-row"><div class="bar-label">claude-sonnet-4-5</div><div class="bar-track"><div class="bar-fill blue" style="width:67.75%">67.75%</div></div></div>
-  <div class="bar-row"><div class="bar-label">claude-opus-4-6</div><div class="bar-track"><div class="bar-fill blue" style="width:66.05%">66.05%</div></div></div>
-  <div class="bar-row"><div class="bar-label">claude-opus-4-5</div><div class="bar-track"><div class="bar-fill blue" style="width:61.3%">61.30%</div></div></div>
-  <div class="bar-row"><div class="bar-label">claude-haiku-4-5</div><div class="bar-track"><div class="bar-fill blue" style="width:58.65%">58.65%</div></div></div>
-  <div class="bar-row"><div class="bar-label">xAI grok-4 *</div><div class="bar-track"><div class="bar-fill orange" style="width:49.5%">49.50%</div></div></div>
-  <p style="margin-top:10px;font-size:0.8rem;color:var(--muted)">* Partial run — 1,406 / 2,000 samples.</p>
-</section>
-
-<!-- ══════════════════ RUNNING ══════════════════ -->
-<section>
-  <h2>Running Evaluations</h2>
-
-  <h3>Setup</h3>
-  <pre><code><span class="kw">source</span> ~/miniforge3/etc/profile.d/conda.sh <span class="kw">&&</span> conda activate CompareBench</code></pre>
-
-  <h3>CompareBench</h3>
-  <pre><code><span class="kw">cd</span> CompareBench/
-python anthropic_HF.py   <span class="comment"># Claude haiku / sonnet / opus (4-5, 4-6)</span>
-python openai_HF.py      <span class="comment"># GPT-5, GPT-5.1, GPT-5.2</span>
-python gemini_HF.py      <span class="comment"># Gemini 2.5 Pro Preview</span>
-python xAI_HF.py         <span class="comment"># Grok-4</span></code></pre>
-
-  <h3>TallyBench</h3>
-  <pre><code><span class="kw">cd</span> TallyBench/
-python anthropic_HF.py
-python openai_HF.py
+cd ACCV2026/Datasets/CompareBench
 python gemini_HF.py
-python xAI_HF.py
-python Other/Qwen2.5-VL_HF.py   <span class="comment"># Qwen2.5-VL 3B/7B/32B/72B (GPU required)</span></code></pre>
+python gpt_HF.py
+python claude_HF.py</code></pre>
+    </section>
 
-  <h3>Accuracy</h3>
-  <pre><code>python CompareBench/Results/acc.py
-python TallyBench/Results/acc.py</code></pre>
-</section>
-
-<!-- ══════════════════ PIPELINE ══════════════════ -->
-<section>
-  <h2>Data Pipeline</h2>
-
-  <h3>CompareBench image generation</h3>
-  <pre><code><span class="kw">cd</span> CompareBench/Other/
-python quantity_comparison_data_json.py   <span class="comment"># 600 2×2 grids (counting)</span>
-python temporal_comparison_data_json.py  <span class="comment"># 300 grids (Hist / Celebrity / Landmark)</span>
-python image_concat.py                   <span class="comment"># Composite 2×2 grid images</span>
-python upload_to_hf.py                   <span class="comment"># Push to Hugging Face Hub</span></code></pre>
-
-  <h3>TallyBench image preparation</h3>
-  <pre><code><span class="kw">cd</span> TallyBench/Other/
-python prepare_tallybench_images.py   <span class="comment"># Resize ≤1024px, 16px-aligned, ≥224px</span>
-python excel_to_json_converter.py     <span class="comment"># Excel metadata → JSON</span>
-python rename.py                      <span class="comment"># Zero-pad filenames (0001.jpg – 2000.jpg)</span>
-python check.py                       <span class="comment"># Validate completeness + dimensions</span>
-python upload_HF.py                   <span class="comment"># Push to Hugging Face Hub</span></code></pre>
-
-  <h3>OmniCaps upload</h3>
-  <pre><code>python OmniCaps/HistCaps/Other/upload_HF.py
-python OmniCaps/LandmarkCaps/Other/upload_HF.py
-python OmniCaps/CelebrityCaps/Other/upload_HF.py</code></pre>
-</section>
-
-<!-- ══════════════════ HF DATASETS ══════════════════ -->
-<section>
-  <h2>Hugging Face Datasets</h2>
-  <div class="hf-links">
-    <a class="hf-chip" href="https://huggingface.co/datasets/qiuzhangTiTi/TallyBench" target="_blank">
-      <span class="hf-icon">&#129303;</span>
-      <span><strong>TallyBench</strong><br><span style="color:var(--muted);font-size:0.75rem">qiuzhangTiTi/TallyBench</span></span>
-    </a>
-    <a class="hf-chip" href="https://huggingface.co/datasets/qiuzhangTiTi/OmniCaps" target="_blank">
-      <span class="hf-icon">&#129303;</span>
-      <span><strong>OmniCaps</strong><br><span style="color:var(--muted);font-size:0.75rem">qiuzhangTiTi/OmniCaps · 3 splits</span></span>
-    </a>
-    <a class="hf-chip" href="https://huggingface.co/datasets/qiuzhangTiTi/CompareBench" target="_blank">
-      <span class="hf-icon">&#129303;</span>
-      <span><strong>CompareBench</strong><br><span style="color:var(--muted);font-size:0.75rem">qiuzhangTiTi/CompareBench · 6 splits</span></span>
-    </a>
+    <footer>
+      CompareBench. Data, prompts, and code will be released with the paper.
+    </footer>
   </div>
-</section>
-
-<!-- ══════════════════ AGENTIC ══════════════════ -->
-<section>
-  <h2>Agentic Evaluation</h2>
-  <p><code>Agent_Solution/</code> packages four tasks for automated agent frameworks:</p>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Task</th><th>Answer Format</th><th>Timeout</th></tr></thead>
-      <tbody>
-        <tr><td><span class="tag">counting/</span></td><td>Integer</td><td>1200s</td></tr>
-        <tr><td><span class="tag">compare_tally/</span></td><td>A/B/C/D</td><td>1200s</td></tr>
-        <tr><td><span class="tag">compare_geometry/</span></td><td>A/B/C/D</td><td>1200s</td></tr>
-        <tr><td><span class="tag">compare_spatial/</span></td><td>A/B/C/D</td><td>1200s</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p>Each task folder contains <code>task.toml</code>, <code>instruction.md</code>, and <code>README.md</code>.</p>
-</section>
-
-<!-- ══════════════════ TECH STACK ══════════════════ -->
-<section>
-  <h2>Tech Stack</h2>
-  <div class="pills">
-    <span class="pill">Anthropic SDK</span>
-    <span class="pill">OpenAI SDK</span>
-    <span class="pill">Google Gemini</span>
-    <span class="pill">xAI</span>
-    <span class="pill">Qwen2.5-VL</span>
-    <span class="pill">FLUX.1-dev</span>
-    <span class="pill">HuggingFace Datasets</span>
-    <span class="pill">Transformers</span>
-    <span class="pill">Pillow</span>
-    <span class="pill">OpenCV</span>
-    <span class="pill">Pandas</span>
-    <span class="pill">Plotly</span>
-    <span class="pill">PyYAML</span>
-    <span class="pill">Python 3.10</span>
-    <span class="pill">Conda</span>
-    <span class="pill">CUDA</span>
-  </div>
-</section>
-
-<footer>
-  CompareBench &nbsp;·&nbsp; 2026
-</footer>
-
-</div>
 </body>
 </html>

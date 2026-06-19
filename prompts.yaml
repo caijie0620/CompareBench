@@ -36,33 +36,13 @@ CompareSpatialBench:
     - If a marked dot is on an object, compare the required spatial property for that object as a whole.
     Answer with a single, precise letter only (e.g., A, B, C, or D). Nothing else. No text. No explanation. No thinking outputs.
 
-CompareHistBench:
+CompareTemporalBench:
   base_prompt: |
-    This is a multimodal reasoning task from the CompareBench, combining visual recognition and background knowledge.
-    The four sub-images labeled (A), (B), (C), and (D) arranged in a 2x2 grid each show a different historical scene or event.
+    This is a temporal comparison task from the CompareBench, combining visual recognition and background knowledge.
+    The four sub-images labeled (A), (B), (C), and (D) arranged in a 2x2 grid may show historical scenes/events, public figures, or landmarks/buildings.
     Follow these rules strictly:
-    - First, recognize what historical event or era each scene depicts based on visual cues such as clothing styles, architectural features, technology, or environmental context.
-    - Then, use your knowledge of historical events and their dates to determine which matches the time specified in the question.
-    - Some sub-images may have been resized, causing aspect ratio distortion, so please recognize and account for this when identifying the historical scenes.
-    Answer with a single, precise letter only (e.g., A, B, C, or D). Nothing else. No text. No explanation. No thinking outputs.
-
-CompareCelebrityBench:
-  base_prompt: |
-    This is a multimodal reasoning task from the CompareBench, combining visual recognition and background knowledge.
-    The four sub-images labeled (A), (B), (C), and (D) arranged in a 2x2 grid each show a different celebrity.
-    Follow these rules strictly:
-    - First, recognize who each celebrity is based on their appearance and any visual context clues.
-    - Then, use your knowledge of their birth dates to determine who matches the time specified in the question.
-    - Some sub-images may have been resized, causing aspect ratio distortion, so please recognize and account for this when identifying the celebrities.
-    Answer with a single, precise letter only (e.g., A, B, C, or D). Nothing else. No text. No explanation. No thinking outputs.
-
-CompareLandmarkBench:
-  base_prompt: |
-    This is a multimodal reasoning task from the CompareBench, combining visual recognition and background knowledge.
-    The four sub-images labeled (A), (B), (C), and (D) arranged in a 2x2 grid each show a different landmark building (e.g., skyscrapers, bridges, historical monuments, temples, etc.).
-    Follow these rules strictly:
-    - First, recognize what each landmark is based on its appearance, architectural style, and any visual context clues.
-    - Then, use your knowledge of their original construction/completion dates to determine which matches the time specified in the question.
+    - First, identify what each sub-image shows using visual cues such as clothing, architecture, technology, scene context, facial identity, or landmark appearance.
+    - Then, use the relevant temporal knowledge to answer the question: event or era dates for historical scenes, birth dates for public figures, and original construction/completion dates for landmarks.
     - If a landmark has been renovated or reconstructed, use its original first construction/completion date, not the renovation date.
-    - Some sub-images may have been resized, causing aspect ratio distortion, so please recognize and account for this when identifying the landmarks.
+    - Some sub-images may have been resized, causing aspect ratio distortion, so please recognize and account for this when identifying the scene, person, or landmark.
     Answer with a single, precise letter only (e.g., A, B, C, or D). Nothing else. No text. No explanation. No thinking outputs.

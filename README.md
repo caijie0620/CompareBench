@@ -18,7 +18,7 @@ The benchmark dataset is available here:
 
 ## Contents
 
-- `prompts.yaml`: Standardized instruction templates for all tasks (TallyBench, CompareTallyBench, CompareGeometryBench, CompareSpatialBench, CompareHistBench, CompareCelebrityBench, and CompareLandmarkBench).  
+- `prompts.yaml`: Standardized instruction templates for all tasks (TallyBench, CompareTallyBench, CompareGeometryBench, CompareSpatialBench, and CompareTemporalBench).
 - Benchmark datasets (links above).  
 - Code (to be released).  
 
@@ -26,5 +26,3 @@ The benchmark dataset is available here:
 
 📌 Paper: *CompareBench: A Benchmark for Visual Comparison Reasoning in Vision–Language Models* (ACCV 2026 submission)  
 📂 Code, data, and prompts will be released in this repository.  
-
-
